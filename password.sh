@@ -1,4 +1,4 @@
-pt install pwgen
+apt install pwgen
 
 cd /var/www/redmine
 
