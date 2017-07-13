@@ -1,5 +1,6 @@
 #!/bin/sh
 
+rbenv rehash
 systemctl start nginx
 systemctl start mysqld
 
