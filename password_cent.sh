@@ -1,6 +1,7 @@
 #!/bin/sh
 
 systemctl start nginx
+systemctl start mysqld
 
 cd /var/www/redmine
 
