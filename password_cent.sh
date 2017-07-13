@@ -1,5 +1,7 @@
 #!/bin/sh
 
+systemctl start nginx
+
 cd /var/www/redmine
 
 sthvar=$(pwgen 13 1)
