@@ -2,7 +2,7 @@
 
 cd /var/www/redmine
 
-sthvar=$(pwgen 8 1)
+sthvar=$(pwgen 13 1)
 
 mkdir /ReadMe
 echo "The Admin Password for Redmine is \""$sthvar"\"" > /ReadMe/ReadMe
