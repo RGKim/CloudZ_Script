@@ -1,2 +1,3 @@
-# redmine_ubuntu
-# redmine_ubuntu
+# redmine
+
+This is shell script for redmine password.
