@@ -1,6 +1,3 @@
-#!/bin/sh
-#!/usr/bin/env ruby
-
 systemctl start nginx
 systemctl start mysqld
 
