@@ -1,3 +1,6 @@
+sudo apt install pwgen
+
+
 sthvar=$(pwgen 8 1)
 
 mkdir /ReadMe
