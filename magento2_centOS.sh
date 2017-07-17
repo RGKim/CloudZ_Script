@@ -16,7 +16,7 @@ urla=$urla$(wget -qO- http://ipecho.net/plain ; echo)
 urla=$urla'/'
 
 
-"echo "The Adress of Admin Page is \""&urla"admin\" >> /ReadMe/ReadMe
+echo "The Adress of Admin Page is \""&urla"admin\" >> /ReadMe/ReadMe
 
 php /var/www/html/bin/magento setup:install --base-url="$urla" --backend-frontname=admin \
  --db-host=localhost --db-name=magento --db-user=magentouser --db-password=Magento@123 \
