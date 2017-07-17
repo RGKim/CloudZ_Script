@@ -1,3 +1,3 @@
-# redmine
+# Provision Script
 
-This is shell script for redmine password.
+This is shell script to reset password.
