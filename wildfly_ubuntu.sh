@@ -1,5 +1,3 @@
-sudo apt-get install pwgen -y
-
 cd /opt/wildfly/bin
 
 sthvar=$(pwgen 8 1)
