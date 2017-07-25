@@ -1,3 +1,4 @@
+mkdir /ReadMe
 
 cd /opt/tomcat/conf
 
