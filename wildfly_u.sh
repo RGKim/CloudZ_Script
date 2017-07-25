@@ -1,6 +1,6 @@
 #! /bin/bash
 
-mkdir /ReadMe
+sudo mkdir /ReadMe
 
 
 cd /opt/wildfly
