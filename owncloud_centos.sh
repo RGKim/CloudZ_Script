@@ -3,7 +3,7 @@ cd /var/www/html/owncloud/config
 
 url=$(wget -qO- http://ipecho.net/plain ; echo)
 
-sed -i "s/169.56.67.82/$url" config.php
+sed -i "s/serverip/$url" config.php
 
 
 cd /var/www/html/owncloud
