@@ -1,7 +1,13 @@
 cd /opt/wildfly
 
-sthvar=$(pwgen 8 1) &> log.txt
+sthvar=$(pwgen 8 1)
 
-echo "The Admin ID is admin and the Password is \""$sthvar"\"" &> Password.txt
+
+mkdir /ReadMe
+echo "The Admin ID is admin and the Password is \""$sthvar"\"" &> /ReadMe/ReadMe
 
 ./bin/add-user.sh admin $sthvar
+
+
+
+
