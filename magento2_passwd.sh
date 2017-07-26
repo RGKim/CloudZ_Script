@@ -29,7 +29,7 @@ MYIP=\$(wget -qO- http://ipecho.net/plain ; echo)
 
 php /var/www/html/bin/magento setup:install --base-url="http://\$MYIP/" --backend-frontname=admin\
  --db-host=localhost --db-name=magento --db-user=magentouser --db-password=\$OS_PASSWORD\
- --admin-firstname=CloudZ --admin-lastname=User --admin-email=admin@admin.com\
+ --admin-firstname=CloudZ --admin-lastname=User --admin-email=magentoadmin@cloudz.com\
  --admin-user=CloudZ --admin-password=\$OS_PASSWORD --language=en_US\
  --currency=USD --timezone=America/Chicago --use-rewrites=1 &>> log.txt
 
