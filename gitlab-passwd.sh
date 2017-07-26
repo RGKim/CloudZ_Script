@@ -13,7 +13,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   systemctl start postfix
   gitlab-ctl reconfigure
   
-  eval "gitlab-rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"$sthvar\"; user.save! '"
+  eval "gitlab-rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"\$NEW_PASSWORD\"; user.save! '"
 
   systemctl disable cloudz
   rm -f /etc/systemd/system/cloudz.service
