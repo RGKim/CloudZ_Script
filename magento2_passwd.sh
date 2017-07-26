@@ -22,6 +22,10 @@ SET PASSWORD FOR 'root'@'::1' = PASSWORD('\$NEW_PASSWORD');\
 SET PASSWORD FOR 'magentouser'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
 FLUSH PRIVILEGES;" &> log.txt
 
+/usr/bin/mysql -u magentouser -p\$OLD_PASSWORD_M magento -e "\
+SET PASSWORD FOR 'magentouser'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
+FLUSH PRIVILEGES;" &>> log.txt
+
 
 
 MYIP=\$(wget -qO- http://ipecho.net/plain ; echo)
