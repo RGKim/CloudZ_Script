@@ -1,10 +1,5 @@
 #!/bin/bash
 
-systemctl enable cloudz
-cat /dev/null > /root/.bash_history && history -c
-
-
-
 cat << EOF > /root/cloudz.sh
 #!/bin/sh
 
@@ -47,3 +42,20 @@ else
 fi
 EOF
 chmod 755 /root/cloudz.sh
+
+cat << EOF > /etc/systemd/system/cloudz.service
+[Unit]
+Description=CloudZ Install
+After=network.target
+
+[Service]
+ExecStart=/root/cloudz.sh
+Type=oneshot
+TimeoutSec=0
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl enable cloudz
+cat /dev/null > /root/.bash_history && history -c
