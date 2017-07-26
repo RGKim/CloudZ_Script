@@ -12,9 +12,6 @@ OLD_PASSWORD="Admin@123"
 OLD_PASSWORD_M="Magento@123"
 NEW_PASSWORD=\$OS_PASSWORD
 INIT_ID="CloudZ"
-MYIP='http://'
-MYIP=\$MYIP\$(wget -qO- http://ipecho.net/plain ; echo)
-MYIP=\$MYIP'/'
 	
 systemctl start mysqld
 
@@ -28,7 +25,6 @@ FLUSH PRIVILEGES;"
 
 
 MYIP=\$(wget -qO- http://ipecho.net/plain ; echo)
-MYIP=\$MYIP'/'
 
 
 php /var/www/html/bin/magento setup:install --base-url="http://\$MYIP/" --backend-frontname=admin\
