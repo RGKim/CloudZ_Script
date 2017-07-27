@@ -21,11 +21,11 @@ SET PASSWORD FOR 'mysql.sys'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
 SET PASSWORD FOR 'magentouser'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
 FLUSH PRIVILEGES;"
 
+MYIP="http://"
+MYIP=\$MYIP\$(wget -qO- http://ipecho.net/plain ; echo)
 
-MYIP=\$(wget -qO- http://ipecho.net/plain ; echo)
 
-
-eval " php /var/www/html/bin/magento setup:install --base-url=\"http://\$MYIP/\" --backend-frontname=admin\
+eval " php /var/www/html/bin/magento setup:install --base-url=\"\$MYIP\" --backend-frontname=admin\
  --db-host=localhost --db-name=magento --db-user=magentouser --db-password=\$NEW_PASSWORD\
  --admin-firstname=CloudZ --admin-lastname=User --admin-email=magentoadmin@cloudz.com\
  --admin-user=CloudZ --admin-password=\$NEW_PASSWORD --language=en_US\
