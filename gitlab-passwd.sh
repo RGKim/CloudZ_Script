@@ -9,30 +9,14 @@ if [ -f "\$CONFIG_FILE" ] ; then
   source \$CONFIG_FILE
 
   NEW_PASSWORD=\$OS_PASSWORD
+  OLD_PASSWORD="admin"
 
+  /usr/bin/mysql -u root -p\$OLD_PASSWORD mysql -e "\
+  SET PASSWORD FOR 'root'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
+  SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('\$NEW_PASSWORD');\
+  SET PASSWORD FOR 'root'@'::1' = PASSWORD('\$NEW_PASSWORD');\
+  FLUSH PRIVILEGES;"
 
-/usr/bin/mysqladmin -u root password "\$NEW_PASSWORD"
-SECURE_MYSQL=\$(expect -c "
-set timeout 10
-spawn mysql_secure_installation
-expect \"Enter current password for root (enter for none):\"
-send \"\$NEW_PASSWORD\r\"
-expect \"Change the root password?\"
-send \"y\r\"
-expect \"New password\"
-send \"\$NEW_PASSWORD\r\"
-expect \"Re-enter new password\"
-send \"\$NEW_PASSWORD\r\"
-expect \"Remove anonymous users?\"
-send \"y\r\"
-expect \"Disallow root login remotely?\"
-send \"y\r\"
-expect \"Remove test database and access to it?\"
-send \"y\r\"
-expect \"Reload privilege tables now?\"
-send \"y\r\"
-expect eof
-")
 
   systemctl start postfix
   gitlab-ctl reconfigure
