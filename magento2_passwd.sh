@@ -9,7 +9,6 @@ if [ -f "\$CONFIG_FILE" ] ; then
 source \$CONFIG_FILE
 
 OLD_PASSWORD="Admin@123"
-OLD_PASSWORD_M="Magento@123"
 NEW_PASSWORD=\$OS_PASSWORD
 INIT_ID="CloudZ"
 	
