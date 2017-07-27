@@ -8,9 +8,11 @@ CONFIG_FILE="/root/provisioningConfiguration.cfg"
 if [ -f "\$CONFIG_FILE" ] ; then
   source \$CONFIG_FILE
 
-  NEW_PASSWORD=\$OS_PASSWORD
   OLD_PASSWORD="admin"
-
+  NEW_PASSWORD=\$OS_PASSWORD
+  
+  systemctl start mariadb
+  
   /usr/bin/mysql -u root -p\$OLD_PASSWORD mysql -e "\
   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
   SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('\$NEW_PASSWORD');\
