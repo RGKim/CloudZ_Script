@@ -17,26 +17,20 @@ systemctl start mysqld
 
 /usr/bin/mysql -u root -p\$OLD_PASSWORD mysql -e "\
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
-SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('\$NEW_PASSWORD');\
-SET PASSWORD FOR 'root'@'::1' = PASSWORD('\$NEW_PASSWORD');\
+SET PASSWORD FOR 'mysql.sys'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
 SET PASSWORD FOR 'magentouser'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
 FLUSH PRIVILEGES;" &> log.txt
-
-/usr/bin/mysql -u magentouser -p\$OLD_PASSWORD_M magento -e "\
-SET PASSWORD FOR 'magentouser'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
-FLUSH PRIVILEGES;" &>> log.txt
-
 
 
 MYIP=\$(wget -qO- http://ipecho.net/plain ; echo)
 
 
-php /var/www/html/bin/magento setup:install --base-url="http://\$MYIP/" --backend-frontname=admin\
+eval "php /var/www/html/bin/magento setup:install --base-url=\"http://\$MYIP/\" --backend-frontname=admin\
  --db-host=localhost --db-name=magento --db-user=magentouser --db-password=\$OS_PASSWORD\
  --admin-firstname=CloudZ --admin-lastname=User --admin-email=magentoadmin@cloudz.com\
  --admin-user=CloudZ --admin-password=\$OS_PASSWORD --language=en_US\
- --currency=USD --timezone=America/Chicago --use-rewrites=1 &>> log.txt
-
+ --currency=USD --timezone=America/Chicago --use-rewrites=1 "
+ 
 chown -R :apache /var/www/html && find /var/www/html -type f -print0 | xargs -r0 chmod 640 && find /var/www/html -type d -print0 | xargs -r0 chmod 750 && chmod -R g+w /var/www/html/{pub,var} && chmod -R g+w /var/www/html/{app/etc,vendor}
 
 systemctl restart httpd
