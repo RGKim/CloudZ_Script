@@ -29,7 +29,7 @@ MYIP=\$"/"
 
 chmod u+x /var/www/html/bin/magento
 
-/var/www/html/bin/magento setup:install --base-url=$MYIP --backend-frontname=admin\
+/var/www/html/bin/magento setup:install --base-url=\$MYIP --backend-frontname=admin\
  --db-host=localhost --db-name=magento --db-user=magentouser --db-password=\$NEW_PASSWORD\
  --admin-firstname=Magento --admin-lastname=User --admin-email=user@cloudz.com\
  --admin-user=cloudz --admin-password=\$NEW_PASSWORD --language=en_US\
