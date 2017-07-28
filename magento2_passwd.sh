@@ -15,11 +15,11 @@ INIT_ID="CloudZ"
   
   systemctl start mariadb
   
-  /usr/bin/mysql -u root -p$OLD_PASSWORD mysql -e "\
-  SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$NEW_PASSWORD');\
-  SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('$NEW_PASSWORD');\
-  SET PASSWORD FOR 'root'@'::1' = PASSWORD('$NEW_PASSWORD');\
-  SET PASSWORD FOR 'magentouser'@'localhost' = PASSWORD('$NEW_PASSWORD');\
+  /usr/bin/mysql -u root -p$\OLD_PASSWORD mysql -e "\
+  SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$\NEW_PASSWORD');\
+  SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('$\NEW_PASSWORD');\
+  SET PASSWORD FOR 'root'@'::1' = PASSWORD('$\NEW_PASSWORD');\
+  SET PASSWORD FOR 'magentouser'@'localhost' = PASSWORD('$\NEW_PASSWORD');\
   FLUSH PRIVILEGES;"
   
   
@@ -30,9 +30,9 @@ MYIP=\$"/"
 chmod u+x /var/www/html/bin/magento
 
 /var/www/html/bin/magento setup:install --base-url=$MYIP --backend-frontname=admin\
- --db-host=localhost --db-name=magento --db-user=magentouser --db-password=Admin@123\
- --admin-firstname=Magento --admin-lastname=User --admin-email=user@example.com\
- --admin-user=admin --admin-password=admin123 --language=en_US\
+ --db-host=localhost --db-name=magento --db-user=magentouser --db-password=$\NEW_PASSWORD\
+ --admin-firstname=Magento --admin-lastname=User --admin-email=user@cloudz.com\
+ --admin-user=cloudz --admin-password=$\NEW_PASSWORD --language=en_US\
  --currency=USD --timezone=Asia/Seoul --use-rewrites=1
 
 chown -R :apache /var/www/html && find /var/www/html -type f -print0 | xargs -r0 chmod 640 && find /var/www/html -type d -print0 | xargs -r0 chmod 750 && chmod -R g+w /var/www/html/{pub,var} && chmod -R g+w /var/www/html/{app/etc,vendor}
