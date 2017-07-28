@@ -32,7 +32,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
 
   systemctl start httpd
   
-  export OC_PASS=$NEW_PASSWORD
+  export OC_PASS=\$NEW_PASSWORD
 
   su -s /bin/sh apache -c 'php ./occ user:resetpassword --password-from-env admin'
   
