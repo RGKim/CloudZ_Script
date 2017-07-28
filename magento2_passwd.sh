@@ -25,7 +25,7 @@ INIT_ID="CloudZ"
   
 MYIP="http://"
 MYIP=\$MYIP\$(wget -qO- http://ipecho.net/plain ; echo)
-MYIP=\$"/"
+MYIP=\$MYIP"/"
 
 chmod u+x /var/www/html/bin/magento
 
