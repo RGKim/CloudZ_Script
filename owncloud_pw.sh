@@ -30,6 +30,8 @@ if [ -f "\$CONFIG_FILE" ] ; then
 
   cd /var/www/html/owncloud
 
+  systemctl start httpd
+  
   export OC_PASS=$NEW_PASSWORD
 
   su -s /bin/sh apache -c 'php ./occ user:resetpassword --password-from-env admin'
