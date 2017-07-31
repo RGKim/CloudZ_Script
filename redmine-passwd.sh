@@ -20,7 +20,9 @@ if [ -f "\$CONFIG_FILE" ] ; then
   SET PASSWORD FOR 'redmine'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
   FLUSH PRIVILEGES;"
 
-  sed -i "s/'\$OLD_PASSWORD'/'\$NEW_PASSWORD'/g" /var/www/redmine/config/database.yml
+  sed -i "s/\$OLD_PASSWORD/\$NEW_PASSWORD/g" /var/www/redmine/config/database.yml
+  
+  cd /var/www/redmine
   
   eval "RAILS_ENV=production bin/rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"\$NEW_PASSWORD\"; user.save! '"
 
