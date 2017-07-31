@@ -16,11 +16,13 @@ if [ -f "\$CONFIG_FILE" ] ; then
   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
   SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('\$NEW_PASSWORD');\
   SET PASSWORD FOR 'root'@'::1' = PASSWORD('\$NEW_PASSWORD');\
+  SET PASSWORD FOR 'redmine'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
   FLUSH PRIVILEGES;"
 
   
   eval "RAILS_ENV=production bin/rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"$NEW_PASSWORD\"; user.save! '"
 
+  
   systemctl disable cloudz
   rm -f /etc/systemd/system/cloudz.service
   rm -f /root/cloudz.sh
