@@ -11,6 +11,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   NEW_PASSWORD=\$OS_PASSWORD
   
   systemctl start mariadb
+  systemctl start nginx
   
   /usr/bin/mysql -u root -p\$OLD_PASSWORD mysql -e "\
   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
@@ -23,6 +24,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   
   eval "RAILS_ENV=production bin/rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"\$NEW_PASSWORD\"; user.save! '"
 
+  systemctl restart nginx
   
   systemctl disable cloudz
   rm -f /etc/systemd/system/cloudz.service
