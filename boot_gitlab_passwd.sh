@@ -28,9 +28,11 @@ if [ -f "\$CONFIG_FILE" ] ; then
   systemctl disable cloudz
   rm -f /etc/systemd/system/cloudz.service
   rm -f /root/cloudz.sh
+  
 else
   echo "provisioningConfiguration file not exist"
 fi
+
 EOF
 
 chmod 755 /root/cloudz.sh
