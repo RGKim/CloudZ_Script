@@ -25,7 +25,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   
   ./platform user password admin@cloudz.co.kr \$NEW_PASSWORD
   
-  systemctl start mattermost
+  systemctl restart mattermost
 
   systemctl disable cloudz
   rm -f /etc/systemd/system/cloudz.service
