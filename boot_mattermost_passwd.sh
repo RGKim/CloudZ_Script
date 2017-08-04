@@ -19,11 +19,13 @@ if [ -f "\$CONFIG_FILE" ] ; then
   SET PASSWORD FOR 'mmuser'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
   FLUSH PRIVILEGES;"
   
-  sed -i "s/'\$OLD_PASSWORD'/'\$NEW_PASSWORD'/g" /opt/mattermost/config/config.json
+  sed -i "s/\$OLD_PASSWORD/\$NEW_PASSWORD/g" /opt/mattermost/config/config.json
   
   cd /opt/mattermost/bin
   
   ./platform user password admin@cloudz.co.kr \$NEW_PASSWORD
+  
+  systemctl start mattermost
 
   systemctl disable cloudz
   rm -f /etc/systemd/system/cloudz.service
