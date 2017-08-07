@@ -4,6 +4,7 @@ cat << EOF > /root/cloudz.sh
 #!/bin/sh
 
 CONFIG_FILE="/root/provisioningConfiguration.cfg"
+
 if [ -f "\$CONFIG_FILE" ] ; then
   source \$CONFIG_FILE
 
