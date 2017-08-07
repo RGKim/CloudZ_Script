@@ -35,7 +35,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   RAILS_ENV=production bundle exec rake db:migrate
   
   touch /root/passwd
-  echo $NEW_PASSWORD > /root/passwd
+  echo \$NEW_PASSWORD > /root/passwd
   
   ./redmine.sh
   
