@@ -3,12 +3,13 @@
 cat << EOF > /root/cloudz.sh
 #!/bin/sh
 
-if [ -s "/root/provisioningConfiguration.cfg" ] ; then
-  
-  . /root/provisioningConfiguration.cfg
+
+CONFIG_FILE="/root/provisioningConfiguration.cfg"
+if [ -f "\$CONFIG_FILE" ] ; then
+  source \$CONFIG_FILE
 
   OLD_PASSWORD="admin"
-  NEW_PASSWORD=\${OS_PASSWORD}
+  NEW_PASSWORD=\$OS_PASSWORD
   
   systemctl start nginx
 
