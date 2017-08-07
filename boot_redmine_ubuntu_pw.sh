@@ -3,9 +3,9 @@
 cat << EOF > /root/cloudz.sh
 #!/bin/sh
 
-CONFIG_FILE="/root/provisioningConfiguration.cfg"
-if [ -f "\$CONFIG_FILE" ] ; then
-  source \$CONFIG_FILE
+if [ -s "/root/provisioningConfiguration.cfg" ] ; then
+  
+  . /root/provisioningConfiguration.cfg
 
   OLD_PASSWORD="admin"
   NEW_PASSWORD=\${OS_PASSWORD}
