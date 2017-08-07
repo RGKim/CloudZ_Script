@@ -37,6 +37,8 @@ if [ -f "\$CONFIG_FILE" ] ; then
   touch /root/passwd
   echo $NEW_PASSWORD > /root/passwd
   
+  ./redmine.sh
+  
   systemctl restart nginx
   
   systemctl disable cloudz
