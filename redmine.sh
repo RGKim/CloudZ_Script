@@ -7,6 +7,7 @@ cat << EOF > /root/redminepw.sh
 
 EOF
 
+chmod 755 redminepw.sh
 ./redminepw.sh
 
 rm -rf redminepw.sh
