@@ -26,14 +26,15 @@ if [ -f "\$CONFIG_FILE" ] ; then
   sed -i "s/\$OLD_PASSWORD/\$NEW_PASSWORD/g" /var/www/redmine/config/database.yml
   
   mkdir -p tmp tmp/pdf public/plugin_assets
-  chown -R nobody:nobody files log tmp public/plugin_assets
-  chmod -R 775 files log tmp public/plugin_assets
+  sudo chown -R www-data:www-data files log tmp public/plugin_assets
+  sudo chmod -R 775 files log tmp public/plugin_assets
   
   gem install bundler
   bundle install --without development test
   
   bundle exec rake generate_secret_token
   RAILS_ENV=production bundle exec rake db:migrate
+  RAILS_ENV=production bundle exec rake redmine:load_default_data
   
   eval "RAILS_ENV=production bin/rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"\$NEW_PASSWORD\"; user.save! '"
 
