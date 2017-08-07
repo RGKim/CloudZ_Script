@@ -17,6 +17,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
   SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('\$NEW_PASSWORD');\
   SET PASSWORD FOR 'root'@'::1' = PASSWORD('\$NEW_PASSWORD');\
+  SET PASSWORD FOR 'debian-sys-maint'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
   SET PASSWORD FOR 'redmine'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
   FLUSH PRIVILEGES;"
   
