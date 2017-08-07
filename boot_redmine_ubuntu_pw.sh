@@ -10,8 +10,8 @@ if [ -f "\$CONFIG_FILE" ] ; then
   OLD_PASSWORD="admin"
   NEW_PASSWORD=\$OS_PASSWORD
   
-  service mariadb start
-  service nginx start
+  systemctl start mariadb
+  systemctl start nginx
   
   /usr/bin/mysql -u root -p\$OLD_PASSWORD mysql -e "\
   SET PASSWORD FOR 'root'@'localhost' = PASSWORD('\$NEW_PASSWORD');\
@@ -38,9 +38,9 @@ if [ -f "\$CONFIG_FILE" ] ; then
   
   eval "RAILS_ENV=production bin/rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"\$NEW_PASSWORD\"; user.save! '"
 
-  service nginx restart
+  systemctl restart nginx
   
-  service cloudz disable
+  systemctl disable cloudz
   
   rm -f /etc/systemd/system/cloudz.service
   rm -f /root/cloudz.sh
@@ -51,35 +51,19 @@ EOF
 
 chmod 755 /root/cloudz.sh
 
-touch /etc/init.d/cloudz
+cat << EOF > /etc/systemd/system/cloudz.service
+[Unit]
+Description=CloudZ Install
+After=network.target
 
-cat << EOF > /etc/init.d/cloudz
-#!/bin/bash
+[Service]
+ExecStart=/root/cloudz.sh
+Type=oneshot
+TimeoutSec=0
 
-### BEGIN INIT INFO
-# Provides:        TestServer
-# Required-Start:  $network
-# Required-Stop:   $network
-# Default-Start:   2 3 4 5
-# Default-Stop:    0 1 6
-# Short-Description: Start/Stop TestServer
-### END INIT INFO
-
-start() {
- sh /root/cloudz.sh
-}
-
-case $1 in
-  start|stop) $1;;
-  restart) stop; start;;
-  *) echo "Run as $0 "; exit 1;;
-esac
-
+[Install]
+WantedBy=multi-user.target
 EOF
 
-chmod 755 /etc/init.d/cloudz
-
-update-rc.d cloudz defaults
-
-service enable cloudz
-cat /dev/null > /root/.bash_history && history -c  
+systemctl enable cloudz
+cat /dev/null > /root/.bash_history && history -c
