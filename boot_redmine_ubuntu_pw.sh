@@ -51,19 +51,35 @@ EOF
 
 chmod 755 /root/cloudz.sh
 
-cat << EOF > /etc/systemd/system/cloudz.service
-[Unit]
-Description=CloudZ Install
-After=network.target
+touch /etc/init.d/cloudz
 
-[Service]
-ExecStart=/root/cloudz.sh
-Type=oneshot
-TimeoutSec=0
+cat << EOF > /etc/init.d/cloudz
+#!/bin/bash
 
-[Install]
-WantedBy=multi-user.target
+### BEGIN INIT INFO
+# Provides:        TestServer
+# Required-Start:  $network
+# Required-Stop:   $network
+# Default-Start:   2 3 4 5
+# Default-Stop:    0 1 6
+# Short-Description: Start/Stop TestServer
+### END INIT INFO
+
+start() {
+ sh /root/cloudz.sh
+}
+
+case $1 in
+  start|stop) $1;;
+  restart) stop; start;;
+  *) echo "Run as $0 "; exit 1;;
+esac
+
 EOF
+
+chmod 755 /etc/init.d/cloudz
+
+update-rc.d cloudz defaults
 
 service enable cloudz
 cat /dev/null > /root/.bash_history && history -c  
