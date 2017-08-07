@@ -34,8 +34,15 @@ if [ -f "\$CONFIG_FILE" ] ; then
   bundle exec rake generate_secret_token
   RAILS_ENV=production bundle exec rake db:migrate
   
-  eval "RAILS_ENV=production bin/rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"\$NEW_PASSWORD\"; user.save! '"
+  echo $NEW_PASSWORD > /root/passwd
+  
+  cat << EOF > /root/redmine.sh
+    #!/bin/sh
+    NEW_PASSWORD=\\$(cat /root/passwd)
 
+    eval "RAILS_ENV=production bin/rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"\\$NEW_PASSWORD\"; user.save! '"
+  EOF
+  
   systemctl restart nginx
   
   systemctl disable cloudz
