@@ -8,7 +8,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   source \$CONFIG_FILE
 
   OLD_PASSWORD="admin"
-  NEW_PASSWORD=\$OS_PASSWORD
+  NEW_PASSWORD=\${OS_PASSWORD}
   
   systemctl start mariadb
   systemctl start nginx
