@@ -44,7 +44,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   touch /root/passwd
   echo \$NEW_PASSWORD > /root/passwd
   
-  sh /root/redminepw.sh
+  source /root/redminepw.sh
   
   systemctl restart nginx
   
