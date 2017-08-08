@@ -9,7 +9,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
 
   OLD_PASSWORD="admin"
   NEW_PASSWORD=\$OS_PASSWORD
-  NEW_PASSWORD_HASH=\$(echo -n \$(echo -n "password" | sha1sum | awk '{print \$1}') | sha1sum | awk '{print \$1}')
+  NEW_PASSWORD_HASH=\$(echo -n \$(echo -n \$NEW_PASSWORD | sha1sum | awk '{print \$1}') | sha1sum | awk '{print \$1}')
   
   systemctl start mariadb
   systemctl start nginx
