@@ -11,6 +11,7 @@ source \$CONFIG_FILE
 OLD_PASSWORD="Admin@123"
 NEW_PASSWORD=\$OS_PASSWORD
 INIT_ID="CloudZ"
+MY_IP=\$NETWORK_eth1_IP
   
   
   systemctl start mariadb
@@ -23,9 +24,7 @@ INIT_ID="CloudZ"
   FLUSH PRIVILEGES;"
   
   
-MYIP="http://"
-MYIP=\$MYIP\$(wget -qO- http://ipecho.net/plain ; echo)
-MYIP=\$MYIP"/"
+MYIP=$(echo http://$MYIP/)
 
 echo $MYIP > /root/ip
 
