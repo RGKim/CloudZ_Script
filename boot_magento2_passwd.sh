@@ -10,7 +10,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   OLD_PASSWORD="Admin@123"
   NEW_PASSWORD=\$OS_PASSWORD
   INIT_ID="CloudZ"
-  MY_IP=\$NETWORK_eth1_IP
+  MYIP=\$(/usr/bin/hostname -i)
   
   
   systemctl start mariadb
