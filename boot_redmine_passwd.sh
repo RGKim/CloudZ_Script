@@ -44,7 +44,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   touch /root/passwd
   echo \$NEW_PASSWORD > /root/passwd
   
-  source /root/redminepw.sh
+  systemctl start redmine
   
   systemctl restart nginx
   
@@ -66,6 +66,20 @@ After=network.target
 
 [Service]
 ExecStart=/root/cloudz.sh
+Type=oneshot
+TimeoutSec=0
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat << EOF > /etc/systemd/system/redminepw.service
+[Unit]
+Description=Set Redmine Password
+After=network.target
+
+[Service]
+ExecStart=/root/redmine.sh
 Type=oneshot
 TimeoutSec=0
 
