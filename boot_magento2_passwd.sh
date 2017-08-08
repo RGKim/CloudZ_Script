@@ -24,9 +24,9 @@ MY_IP=\$NETWORK_eth1_IP
   FLUSH PRIVILEGES;"
   
   
-MYIP=$(echo http://$MYIP/)
+MYIP=\$(echo http://\$MYIP/)
 
-echo $MYIP > /root/ip
+echo \$MYIP > /root/ip
 
 chmod u+x /var/www/html/bin/magento
 
