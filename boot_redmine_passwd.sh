@@ -49,6 +49,8 @@ if [ -f "\$CONFIG_FILE" ] ; then
   systemctl restart nginx
   
   systemctl disable cloudz
+  systemctl disable redminepw
+  
   rm -f /etc/systemd/system/cloudz.service
   rm -f /root/cloudz.sh
 else
