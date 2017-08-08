@@ -24,7 +24,13 @@ if [ -f "\$CONFIG_FILE" ] ; then
   cd /var/www/redmine
   
   sed -i "s/\$OLD_PASSWORD/\$NEW_PASSWORD/g" /var/www/redmine/config/database.yml
- 
+  
+  gem install bundler
+  bundle install --without development test
+  
+  bundle exec rake generate_secret_token
+  RAILS_ENV=production bundle exec rake db:migrate
+  
   /usr/bin/mysql -u redmine -p\$NEW_PASSWORD redmine -e "\
   UPDATE users SET hashed_password='\$NEW_PASSWORD_HASH' WHERE login='admin';\
   UPDATE users SET salt='' WHERE login='admin';"
