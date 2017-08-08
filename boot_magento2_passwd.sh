@@ -27,13 +27,15 @@ MYIP="http://"
 MYIP=\$MYIP\$(wget -qO- http://ipecho.net/plain ; echo)
 MYIP=\$MYIP"/"
 
+echo $MYIP > /root/ip
+
 chmod u+x /var/www/html/bin/magento
 
 /var/www/html/bin/magento setup:install --base-url=\$MYIP --backend-frontname=admin\
  --db-host=localhost --db-name=magento --db-user=magentouser --db-password=\$NEW_PASSWORD\
  --admin-firstname=Magento --admin-lastname=User --admin-email=user@cloudz.com\
  --admin-user=cloudz --admin-password=\$NEW_PASSWORD --language=en_US\
- --currency=USD --timezone=Asia/Seoul --use-rewrites=1
+ --currency=USD --timezone=Asia/Seoul --use-rewrites=1 > /root/log
 
 chown -R :apache /var/www/html && find /var/www/html -type f -print0 | xargs -r0 chmod 640 && find /var/www/html -type d -print0 | xargs -r0 chmod 750 && chmod -R g+w /var/www/html/{pub,var} && chmod -R g+w /var/www/html/{app/etc,vendor}
 
