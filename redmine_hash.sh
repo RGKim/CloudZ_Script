@@ -29,23 +29,16 @@ if [ -f "\$CONFIG_FILE" ] ; then
   UPDATE users SET hashed_password='\$NEW_PASSWORD_HASH' WHERE login='admin';\
   UPDATE users SET salt='' WHERE login='admin';"
   
-  mkdir -p tmp tmp/pdf public/plugin_assets
-  chown -R nobody:nobody files log tmp public/plugin_assets
-  chmod -R 775 files log tmp public/plugin_assets
-  
-  
   systemctl restart nginx
   systemctl disable cloudz
   
   rm -f /etc/systemd/system/cloudz.service
   rm -f /root/cloudz.sh
-  rm -f /root/boot_redmine_passwd.sh
 else
   echo "provisioningConfiguration file not exist"
 fi
 EOF
 
-chmod 755 /root/redminepw.sh
 chmod 755 /root/cloudz.sh
 
 cat << EOF > /etc/systemd/system/cloudz.service
