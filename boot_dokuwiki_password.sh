@@ -21,7 +21,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   OLD_HASH="\\\$1\\\$oSPeikZz\\\$R6AtspElDPu0YvYx8gKLh."
   NEW_HASH=\$(python -c "import crypt, getpass, pwd; print crypt.crypt('\$NEW_PASSWORD', '\\\$1\\\$test\\$')")
   
-  sed -i "s/'\$OLD_HASH'/'\$NEW_HASH'/g" /var/www/html/conf/users.auth.php
+  sed -i "s/\$OLD_HASH/\$NEW_HASH/g" /var/www/html/conf/users.auth.php
 
   systemctl disable cloudz
   
