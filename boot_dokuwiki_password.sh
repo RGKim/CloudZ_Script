@@ -9,7 +9,6 @@ if [ -f "\$CONFIG_FILE" ] ; then
 
   OLD_PASSWORD="admin"
   NEW_PASSWORD=\$OS_PASSWORD
-  NEW_PASSWORD_HASH=\$(echo -n \$(echo -n \$NEW_PASSWORD | sha1sum | awk '{print \$1}') | sha1sum | awk '{print \$1}')
   
   systemctl start mariadb
 
@@ -19,8 +18,10 @@ if [ -f "\$CONFIG_FILE" ] ; then
   SET PASSWORD FOR 'root'@'::1' = PASSWORD('\$NEW_PASSWORD');\
   FLUSH PRIVILEGES;"
   
-  sed -i "s/\$OLD_PASSWORD/\$NEW_PASSWORD/g" /var/www/redmine/config/database.yml
-
+  OLD_HASH="\$1\$oSPeikZz$R6AtspElDPu0YvYx8gKLh."
+  NEW_HASH=\$(python -c "import crypt, getpass, pwd; print crypt.crypt('\$NEW_PASSWORD', '\\$1\\$test\\$')")
+  
+  sed -i "s/'\$OLD_HASH'/'\$NEW_HASH'/g" /var/www/html/conf/users.auth.php
 
   systemctl disable cloudz
   
