@@ -53,6 +53,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   
   rm -f /etc/systemd/system/cloudz.service
   rm -f /root/cloudz.sh
+  rm -f /root/boot_redmine_passwd.sh
 else
   echo "provisioningConfiguration file not exist"
 fi
@@ -81,7 +82,7 @@ Description=Set Redmine Password
 After=network.target
 
 [Service]
-ExecStart=/root/redmine.sh
+ExecStart=/root/redminepw.sh
 Type=oneshot
 TimeoutSec=0
 
