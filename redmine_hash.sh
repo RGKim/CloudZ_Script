@@ -25,7 +25,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   
   sed -i "s/\$OLD_PASSWORD/\$NEW_PASSWORD/g" /var/www/redmine/config/database.yml
  
-  /usr/bin/mysql -u root -p\$NEW_PASSWORD mysql -e "\
+  /usr/bin/mysql -u redmine -p\$NEW_PASSWORD redmine -e "\
   UPDATE users SET hashed_password='\$NEW_PASSWORD_HASH' WHERE login='admin';\
   UPDATE users SET salt='' WHERE login='admin';"
   
