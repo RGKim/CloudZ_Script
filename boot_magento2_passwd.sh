@@ -6,12 +6,11 @@ cat << EOF > /root/cloudz.sh
 CONFIG_FILE="/root/provisioningConfiguration.cfg"
 
 if [ -f "\$CONFIG_FILE" ] ; then
-source \$CONFIG_FILE
-
-OLD_PASSWORD="Admin@123"
-NEW_PASSWORD=\$OS_PASSWORD
-INIT_ID="CloudZ"
-MY_IP=\$NETWORK_eth1_IP
+  source \$CONFIG_FILE
+  OLD_PASSWORD="Admin@123"
+  NEW_PASSWORD=\$OS_PASSWORD
+  INIT_ID="CloudZ"
+  MY_IP=\$NETWORK_eth1_IP
   
   
   systemctl start mariadb
@@ -24,28 +23,27 @@ MY_IP=\$NETWORK_eth1_IP
   FLUSH PRIVILEGES;"
   
   
-MYIP=\$(echo http://\$MYIP/)
-
-echo \$MYIP > /root/ip
-
-chmod u+x /var/www/html/bin/magento
-
-/var/www/html/bin/magento setup:install --base-url=\$MYIP --backend-frontname=admin\
+  MYIP=\$(echo http://\$MYIP/)
+  echo \$MYIP > /root/ip
+  
+  chmod u+x /var/www/html/bin/magento
+  
+  /var/www/html/bin/magento setup:install --base-url=\$MYIP --backend-frontname=admin\
  --db-host=localhost --db-name=magento --db-user=magentouser --db-password=\$NEW_PASSWORD\
  --admin-firstname=Magento --admin-lastname=User --admin-email=user@cloudz.com\
  --admin-user=cloudz --admin-password=\$NEW_PASSWORD --language=en_US\
  --currency=USD --timezone=Asia/Seoul --use-rewrites=1 > /root/log
 
-chown -R :apache /var/www/html && find /var/www/html -type f -print0 | xargs -r0 chmod 640 && find /var/www/html -type d -print0 | xargs -r0 chmod 750 && chmod -R g+w /var/www/html/{pub,var} && chmod -R g+w /var/www/html/{app/etc,vendor}
+  chown -R :apache /var/www/html && find /var/www/html -type f -print0 | xargs -r0 chmod 640 && find /var/www/html -type d -print0 | xargs -r0 chmod 750 && chmod -R g+w /var/www/html/{pub,var} && chmod -R g+w /var/www/html/{app/etc,vendor}
 
-systemctl restart httpd
-systemctl disable cloudz
+  systemctl restart httpd
+  systemctl disable cloudz
 
-rm -f /etc/systemd/system/cloudz.service
-rm -f /root/cloudz.sh
+  rm -f /etc/systemd/system/cloudz.service
+  rm -f /root/cloudz.sh
 
 else
-echo "provisioningConfiguration file not exist"
+  echo "provisioningConfiguration file not exist"
 fi
 EOF
 
