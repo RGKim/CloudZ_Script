@@ -1,5 +1,12 @@
 #!/bin/bash
 
+cat << EOF > /root/redminepw.sh
+#!/bin/sh
+  NEW_PASSWORD="\$(cat /root/passwd)"
+  eval "RAILS_ENV=production /var/www/redmine/bin/rails runner 'puts user = User.find(1); user.password, user.password_confirmation = \"\$NEW_PASSWORD\"; user.save! '"
+
+EOF
+
 cat << EOF > /root/cloudz.sh
 #!/bin/sh
 
@@ -37,7 +44,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   touch /root/passwd
   echo \$NEW_PASSWORD > /root/passwd
   
-  source /root/redmine.sh
+  sh /root/redminepw.sh
   
   systemctl restart nginx
   
@@ -49,6 +56,7 @@ else
 fi
 EOF
 
+chmod 755 /root/redminepw.sh
 chmod 755 /root/cloudz.sh
 
 cat << EOF > /etc/systemd/system/cloudz.service
