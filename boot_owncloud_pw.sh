@@ -8,7 +8,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   source \$CONFIG_FILE
 
 
-  OLD_PASSWORD="Admin@123"
+  OLD_PASSWORD="admin"
   NEW_PASSWORD=\$OS_PASSWORD
   MYIP=\$(/usr/bin/hostname -i)
 
