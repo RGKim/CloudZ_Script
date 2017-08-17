@@ -41,7 +41,7 @@ iptables -A INPUT -p ALL -s 169.55.118.0/23 -j ACCEPT
 iptables -A INPUT -p ALL -s 169.60.118.0/23 -j ACCEPT
 iptables -A INPUT -p ALL -s 169.61.118.0/23 -j ACCEPT
 iptables -A INPUT -p ALL -s 159.253.157.0/24 -j ACCEPT
-iptables -A INPUT -p ALL -s 159.8.197.0./24 -j ACCEPT
+iptables -A INPUT -p ALL -s 159.8.197.0/24 -j ACCEPT
 iptables -A INPUT -p ALL -s 169.38.117.0/24 -j ACCEPT
 iptables -A INPUT -p ALL -s 67.228.66.0/24 -j ACCEPT
 iptables -A INPUT -p ALL -s 75.126.76.0/24 -j ACCEPT
