@@ -1,5 +1,8 @@
 #!/bin/sh
 
+systemctl start firewalld
+systemctl enable firewalld
+
 firewall-cmd --permanent --zone=public --add-port=159.253.158.0/23/tcp
 firewall-cmd --permanent --zone=public --add-port=159.8.198.0/23/tcp
 firewall-cmd --permanent --zone=public --add-port=169.38.118.0/23/tcp
