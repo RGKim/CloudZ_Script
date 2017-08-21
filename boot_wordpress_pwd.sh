@@ -8,7 +8,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   source \$CONFIG_FILE
 
   INIT_ID="CloudZ"
-  OLD_PASSWORD="Secret@77"
+  OLD_PASSWORD=\$(cat /root/INIT_PASSWORD)
   NEW_PASSWORD=\$OS_PASSWORD
   MYIP=\$(/usr/bin/hostname -i)
 
@@ -37,6 +37,7 @@ if [ -f "\$CONFIG_FILE" ] ; then
   systemctl disable cloudz
   rm -f /etc/systemd/system/cloudz.service
   rm -f /root/cloudz.sh
+  rm -f /root/INIT_PASSWORD
 else
   echo "provisioningConfiguration file not exist"
 fi
@@ -56,6 +57,7 @@ TimeoutSec=0
 [Install]
 WantedBy=multi-user.target
 EOF
-
 systemctl enable cloudz
+
+rm -f /root/post*
 cat /dev/null > /root/.bash_history && history -c
