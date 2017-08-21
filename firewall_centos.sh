@@ -256,6 +256,10 @@ iptables -A INPUT -p ALL -s 209.85.4.0/26 -j ACCEPT
 iptables -A INPUT -p ALL -s 216.12.193.9 -j ACCEPT
 iptables -A INPUT -p ALL -s 216.40.193.0/24 -j ACCEPT
 iptables -A INPUT -p ALL -s 216.234.234.0/24 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 
 service iptables save
 
