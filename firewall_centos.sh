@@ -1,5 +1,13 @@
 #!/bin/sh
 
+systemctl stop firewalld
+systemctl mask firewalld
+
+yum install iptables-services -y
+systemctl enable iptables
+
+systemctl start iptables
+
 iptables -A INPUT -p ALL -s 159.253.158.0/23 -j ACCEPT
 iptables -A INPUT -p ALL -s 159.8.198.0/23 -j ACCEPT
 iptables -A INPUT -p ALL -s 169.38.118.0/23 -j ACCEPT
@@ -249,3 +257,6 @@ iptables -A INPUT -p ALL -s 216.12.193.9 -j ACCEPT
 iptables -A INPUT -p ALL -s 216.40.193.0/24 -j ACCEPT
 iptables -A INPUT -p ALL -s 216.234.234.0/24 -j ACCEPT
 
+service iptables save
+
+iptables -L
