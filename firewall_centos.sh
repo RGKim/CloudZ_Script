@@ -263,4 +263,6 @@ iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 
 service iptables save
 
+systemctl restart iptables
+
 iptables -L
